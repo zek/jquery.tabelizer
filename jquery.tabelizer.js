@@ -193,7 +193,7 @@
 				
 				//apply labels around the first column text, so that we can add in the controls and expander image
 				$firstCol = $($row.children('td')[0])
-				var firstColVal = '<div class="labels">' + $firstCol.html() + '</div>'; //rename label to labels, because conflicting with bootstrap label class
+				var firstColVal = '<div class="labels">' + $firstCol.html() + '</div>'; //rename label to row-label, because conflicting with bootstrap label class
 				var parentLevels = 0;
 				
 				//add in the line control div, add it in for every level up until your current level, this is to ensure we can show all the needed lines.
