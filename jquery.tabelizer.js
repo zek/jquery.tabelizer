@@ -182,6 +182,7 @@
 			//don't apply any logic tot the header row
 			if (!$row.hasClass('header')){
 				currentLevel = $row.data('level');
+				childCount = $row.data('child'); //detecting the child nodes
 			
 				//initially all rows other than the first level are hidden
 				var rowClass = 'l' + currentLevel + ' contracted ' + (currentLevel > 1 ? ' hidden' : '');
@@ -194,7 +195,7 @@
 				
 				//apply labels around the first column text, so that we can add in the controls and expander image
 				$firstCol = $($row.children('td')[0])
-				var firstColVal = '<div class="label">' + $firstCol.html() + '</div>';
+				var firstColVal = '<div class="labels">' + $firstCol.html() + '</div>'; //rename label to row-label, because conflicting with bootstrap label class
 				var parentLevels = 0;
 				
 				//add in the line control div, add it in for every level up until your current level, this is to ensure we can show all the needed lines.
@@ -203,9 +204,15 @@
 					levelLines += ' <div class="line level' + (x + 1) + '"><div class="vert"></div><div class="horz"></div></div> ';
 				}
 				levelLines += '</div>'
+
 				//Add the expanded class, which through css adds in the arrow image
-				$firstCol.html(levelLines + ' <div class="expander"></div> ' + firstColVal);
-				 
+				if(childCount>0){ //if zero child then no control to display
+					$firstCol.html(levelLines + ' <div class="expander"></div> ' + firstColVal);
+				}
+				else{
+					$firstCol.html(levelLines + firstColVal);
+				}
+				
 				//apply the method to be called on each row click, if fullRowClickable is set to false, then only the expander is clickable
 				if (self.conf.fullRowClickable)
 					$row.on('click', self.conf.onRowClick);
