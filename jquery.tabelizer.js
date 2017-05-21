@@ -39,7 +39,7 @@
 		
 		var id = $row.attr('id');
 		
-		if (!row.hasClass('childless')){
+		if (!$row.hasClass('childless')){
 			//Simple toggle for contract/expand logic
 			if ($row.hasClass('contracted')){
 				$row.removeClass('contracted').addClass('expanded');
